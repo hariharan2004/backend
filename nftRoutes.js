@@ -1,7 +1,7 @@
 const express = require("express");
-const NFT = require("../models/NFTModel");
+const NFT = require("./NFTModel");
 const router = express.Router();
-const collections = require("../models/NFTCollection");
+const collections = require("./NFTCollection");
 // Fetch Staked NFTs for a User
 router.get("/collections", async (req, res) => {
   try {
