@@ -1,8 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
-const connectDB = require("./config/db");
-const nftRoutes = require("./routes/nftRoutes");
+const connectDB = require("./db");
+const nftRoutes = require("./nftRoutes");
 
 dotenv.config();
 connectDB();
