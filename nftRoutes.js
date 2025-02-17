@@ -20,7 +20,7 @@ router.get("/collections/:href", async (req, res) => {
     }
 
     // Try finding with or without the leading slash
-    const collection = await Collection.findOne({
+    const collection = await collections.findOne({
       $or: [{ href: href }, { href: `/${href}` }],
     });
 
