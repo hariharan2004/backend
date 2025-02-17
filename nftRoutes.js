@@ -11,6 +11,20 @@ router.get("/collections", async (req, res) => {
     res.status(500).json({ message: "Server Error", error });
   }
 });
+app.get("/collections/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const collection = await collections.findById(id);
+    
+    if (!collection) {
+      return res.status(404).json({ message: "Collection not found" });
+    }
+
+    res.json(collection);
+  } catch (error) {
+    res.status(500).json({ error: "Server error" });
+  }
+});
 router.get("/staked-nfts/:wallet", async (req, res) => {
   try {
     const wallet = req.params.wallet.toLowerCase();
