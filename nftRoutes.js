@@ -13,9 +13,16 @@ router.get("/collections", async (req, res) => {
 });
 router.get("/collections/:href", async (req, res) => {
   try {
-    const { href } = req.params; // Extract href from URL
+    const { href } = req.params;
 
-    const collection = await Collection.findOne({ href: href }); // Query by href
+    if (!href) {
+      return res.status(400).json({ error: "Missing href parameter" });
+    }
+
+    // Try finding with or without the leading slash
+    const collection = await Collection.findOne({
+      $or: [{ href: href }, { href: `/${href}` }],
+    });
 
     if (!collection) {
       return res.status(404).json({ message: "Collection not found" });
