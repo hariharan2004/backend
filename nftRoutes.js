@@ -11,7 +11,7 @@ router.get("/collections", async (req, res) => {
     res.status(500).json({ message: "Server Error", error });
   }
 });
-app.get("/collections/:id", async (req, res) => {
+router.get("/collections/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const collection = await collections.findById(id);
