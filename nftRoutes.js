@@ -11,17 +11,19 @@ router.get("/collections", async (req, res) => {
     res.status(500).json({ message: "Server Error", error });
   }
 });
-router.get("/collections/:id", async (req, res) => {
+router.get("/collections/:href", async (req, res) => {
   try {
-    const { id } = req.params;
-    const collection = await collections.findById(id);
-    
+    const { href } = req.params; // Extract href from URL
+
+    const collection = await Collection.findOne({ href: href }); // Query by href
+
     if (!collection) {
       return res.status(404).json({ message: "Collection not found" });
     }
 
     res.json(collection);
   } catch (error) {
+    console.error("Error fetching collection:", error);
     res.status(500).json({ error: "Server error" });
   }
 });
